@@ -1,55 +1,28 @@
-const images = document.querySelectorAll('.slider .slider-line img');
-const sliderLine = document.querySelector('.slider .slider-line');
-let count = 0;
-let width;
+let tab = function () {
+    let tabNav = document.querySelectorAll('.tabs-nav__item'),
+        tabContent = document.querySelectorAll('.tab'),
+        tabName;
 
-function init() {
-    console.log('resize');
-    width = document.querySelector('.slider').offsetWidth;
-    sliderLine.style.width = width * images.length + 'px';
-    images.forEach(item => {
-        item.style.width = width + 'px';
-        item.style.height = 'auto';
+    tabNav.forEach(item => {
+        item.addEventListener('click', selectTabNav)
     });
-    rollSlider();
-}
 
-init();
-window.addEventListener('resize', init);
-
-document.querySelector('.slider-next').addEventListener('click', function () {
-    count++;
-    if (count >= images.length) {
-        count = 0;
+    function selectTabNav() {
+        tabNav.forEach(item => {
+            item.classList.remove('is-active');
+        });
+        this.classList.add('is-active');
+        tabName = this.getAttribute('data-tab-name');
+        selectTabContent(tabName);
     }
-    rollSlider();
-});
 
-document.querySelector('.slider-prev').addEventListener('click', function () {
-    count--;
-    if (count < 0) {
-        count = images.length - 1;
+    function selectTabContent(tabName) {
+        tabContent.forEach(item => {
+            item.classList.contains(tabName) ? item.classList.add('is-active') : item.classList.remove('is-active');
+        })
     }
-    rollSlider();
-});
 
-function rollSlider() {
-    sliderLine.style.transform = 'translate(-' + count * width + 'px)';
+};
 
-}
 
-function nextBtn() {
-  count++;
-  if (count >= images.length) {
-      count = 0;
-  }
-  rollSlider();
-}
-
-setInterval(() => {
-  count++;
-    if (count >= images.length) {
-        count = 0;
-    }
-    rollSlider();
-}, 5000);
+tab();
