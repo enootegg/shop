@@ -79,15 +79,15 @@
 					<input type="hidden" name="form_subject" value="Заявка с сайта Сайт">
 					<label class="order__label">
 						<span class="order__text">Ваше ім'я</span>
-						<input type="text" name="Імя" class="order__input">
+						<input type="text" name="Імя" class="order__input" id="formName">
 					</label>
 					<label class="order__label">
 						<span class="order__text">Номер телефону</span>
-						<input type="tel" name="Телефон" class="order__input" placeholder="+380 (__)___-____">
+						<input type="tel" name="Телефон" class="order__input" placeholder="+380 (__)___-____" id="formTel">
 					</label>
 					<label class="order__label">
 						<span class="order__text">Пошта</span>
-						<input type="email" name="Email" class="order__input" placeholder="example@gmail.com">
+						<input type="email" name="Email" class="order__input" placeholder="example@gmail.com" id="formMail">
 					</label>
 					<button class="order__btn btn">Оформити замовлення</button>
 				</form>
@@ -242,6 +242,7 @@
             </div>
         </div>
     </section>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="script.js"></script>
     <script src="simplebar.js"></script>

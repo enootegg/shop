@@ -175,12 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const minusSumm = () => {
-        document.querySelectorAll('.cart-content__item').forEach(el => {
-            price -= parseInt(priceWithoutSpaces(el.querySelector('.cart-product__price').textContent));
-        });
-    };
-
     const initialState = () => {
         if (localStorage.getItem('products') !== null) {
             cartProductsList.querySelector('.simplebar-content').innerHTML = localStorage.getItem('products');
@@ -222,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.order-product__price').forEach(e => {
                 i += parseInt(priceWithoutSpaces(e.textContent));
             });
-            document.querySelector('.order-modal__summ span').textContent = `${i} грн`;
+            document.querySelector('.order-modal__summ span').textContent = `${normalPrice(i)} грн`;
             
             const index = productArray.findIndex(el => el.id === id);
                 if (index !== -1) {
@@ -248,40 +242,51 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('Телефон', tel);
         formData.append('Email', mail);
 
+        const cartLog = () => {
+            let arr = [];
+            productArray.forEach(element => {
+                arr.push(`Назва: ${element.title}`);
+                arr.push(` Ціна: ${element.price}`);
+                arr.push(` id: ${element.id}\n`);
 
-        sendMail();
+            });
+            return arr;
+          };
+          
+          function checkValue() {
+            let FormValue =
+              "Ім'я: " +
+              document.querySelector('#formName').value +
+              " Телефон: " +
+              document.querySelector('#formTel').value +
+              " Пошта: " +
+              document.querySelector('#formMail').value +
+              " Замовлення: ";
+            return FormValue;
+          }
+          
+          const readyMail = () => {        
 
+            return checkValue() + cartLog();
+          };
 
+    
+        function sendMail() {     
+            console.log(readyMail());           
+            if (!localStorage.length == "0") {
+              Email.send({
+                SecureToken: "d0a2a0ff-f5ee-4abf-9573-bd98689c8945",
+                To: "vitaliybodnarchuk2002@gmail.com",
+                From: "mailbot7000@gmail.com",
+                Subject: "Замовлення",
+                Body: readyMail()
+              }).then(alert("Замовлення відправлено. Очікуйте дзвінка."));
+            }
+          }
 
-        // let xhr = new XMLHttpRequest();
+          sendMail();
 
-        // xhr.onreadystatechange = function() {
-        //     if (xhr.readyState === 4) {
-        //         if (xhr.status === 200) {
-        //             console.log('Відправлено');
-        //         }
-        //     }
-        // }
+          console.log('submit');
 
-        // xhr.open('POST', 'mail.php', true);
-        // xhr.send(formData);
-
-        self.reset();
     });
-
-    const readyMail = () => {
-        return formData;
-      };
-
-    function sendMail() {
-        if (!localStorage.length == "0") {
-          Email.send({
-            SecureToken: "e0f5079a-515d-4f13-935d-c187aea28de6",
-            To: "vitaliybodnarchuk2002@gmail.com",
-            From: "vitaliybodnarchuk2002@gmail.com",
-            Subject: "Замовлення",
-            Body: readyMail()
-          }).then(alert("Замовлення відправлено. Очікуйте дзвінка."));
-        }
-      }
 });
