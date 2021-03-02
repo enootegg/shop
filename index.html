@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="simplebar.css">
+    <link rel="stylesheet" href="modal/modal.css">
     <link rel="stylesheet" href="style.css">
     <title>Janna Shop</title>
 </head>
@@ -21,9 +24,76 @@
                 <li><a class="menu__item" href="#">Акції</a></li>
                 <li><a class="menu__item" href="about.html">Про нас</a></li>
                 <li><a class="menu__item contacts" href="#">Контакти</a></li>
-              </ul>
+            </ul>
+            <div class="header__cart cart" tabindex="0">
+                <div class="cart__logo">
+                    <ion-icon name="basket"></ion-icon>
+                    <span class="cart__quantity">0</span>
+                </div>
+                <div class="cart-content">
+                    <ul class="cart-content__list" data-simplebar>
+                    </ul>
+                    <div class="cart-content__bottom">
+                        <div class="cart-content__fullprice">
+                            <span>Всього:</span>
+                            <span class="fullprice">298 грн</span>
+                        </div>
+                        <button class="cart-content__btn btn" data-graph-path="modal" data-graph-animation="fadeInUp">Перейти в корзину</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
+    <div class="modal">
+		<div class="modal__container order-modal" role="dialog" aria-modal="true" data-graph-target="modal">
+			<div class="modal-content order-modal__content">
+				<div class="order-modal__top">
+					<h2 class="order-modal__title">Оформлення замовлення</h2>
+					<span class="order-modal__number">Замовлення № 3456 67</span>
+				</div>
+				<div class="order-modal__info">
+					<div class="order-modal__quantity order-modal__info-item">Товарів в замовленні: <span>3 шт</span></div>
+					<div class="order-modal__summ order-modal__info-item">Сума замовлення: <span>5 687 грн</span></div>
+					<div class="order-modal__products order-modal__info-item">
+						<button class="order-modal__btn">
+                            Склад замовлення
+                            <ion-icon class="arrow-down" name="arrow-dropdown"></ion-icon>
+                        </button>
+						<ul class="order-modal__list">
+							<!-- <li class="order-modal__item">
+								<article class="order-modal__product order-product">
+									<img src="img/goods2.png" alt="" class="order-product__img">
+									<div class="order-product__text">
+										<h3 class="order-product__title">Крем для рук Eveline Coconut</h3>
+										<span class="order-product__price">823 грн</span>
+									</div>
+									<button class="order-product__delete">Видалити</button>
+								</article>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+				<form action="#" class="order-modal__form order">
+					<input type="hidden" name="theme" value="Обратный звонок">
+					<input type="hidden" name="admin_email[]" value="maxgraph23@gmail.com">
+					<input type="hidden" name="form_subject" value="Заявка с сайта Сайт">
+					<label class="order__label">
+						<span class="order__text">Ваше ім'я</span>
+						<input type="text" name="Імя" class="order__input">
+					</label>
+					<label class="order__label">
+						<span class="order__text">Номер телефону</span>
+						<input type="tel" name="Телефон" class="order__input" placeholder="+380 (__)___-____">
+					</label>
+					<label class="order__label">
+						<span class="order__text">Пошта</span>
+						<input type="email" name="Email" class="order__input" placeholder="example@gmail.com">
+					</label>
+					<button class="order__btn btn">Оформити замовлення</button>
+				</form>
+			</div>
+		</div>
+	</div>
     <div class="intro">
         <div class="intro-container">
             <div class="intro-text">
@@ -48,56 +118,121 @@
                             <section class="goods">
                                 <div class="goods-item" id="goods1">
                                     <img src="img/goods.png" alt="goods1">
-                                    <h4>Крем для рук Eveline Banana</h4>
-                                    <p class="price">55 грн.</p>
+                                    <h4 class="goods-title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+                                    <p class="price">983 грн.</p>
                                     <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
                                 </div>
                                 <div class="goods-item" id="goods2">
                                     <img src="img/goods2.png" alt="goods2">
-                                    <h4>Крем для рук Eveline Coconut</h4>
-                                    <p class="price">55 грн.</p>
+                                    <h4 class="goods-title">Крем для рук Eveline Coconut</h4>
+                                    <p class="price">380 грн.</p>
                                     <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
                                 </div>
                                 <div class="goods-item" id="goods3">
                                     <img src="img/goods.png" alt="goods3">
-                                    <h4>Крем для рук Eveline Banana</h4>
-                                    <p class="price">55 грн.</p>
+                                    <h4 class="goods-title">Крем для рук Eveline Banana</h4>
+                                    <p class="price">876 грн.</p>
                                     <p class="aviability not-aviable">Немає в наявності</p>
+                                    <button class="product__btn btn" disabled>В корзину</button>
                                 </div>
                                 <div class="goods-item" id="goods4">
                                     <img src="img/goods2.png" alt="goods4">
-                                    <h4>Крем для рук Eveline Coconut</h4>
+                                    <h4 class="goods-title">Крем для рук Eveline Coconut</h4>
                                     <p class="price">55 грн.</p>
                                     <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
                                 </div>
                                 <div class="goods-item" id="goods5">
                                     <img src="img/goods.png" alt="goods5">
-                                    <h4>Крем для рук Eveline Banana</h4>
+                                    <h4 class="goods-title">Крем для рук Eveline Banana</h4>
                                     <p class="price">55 грн.</p>
                                     <p class="aviability not-aviable">Немає в наявності</p>
+                                    <button class="product__btn btn" disabled>В корзину</button>
                                 </div>
                                 <div class="goods-item" id="goods6">
                                     <img src="img/goods2.png" alt="goods6">
-                                    <h4>Крем для рук Eveline Coconut</h4>
+                                    <h4 class="goods-title">Крем для рук Eveline Coconut</h4>
                                     <p class="price">55 грн.</p>
                                     <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
                                 </div>
                                 <div class="goods-item" id="goods7">
                                     <img src="img/goods.png" alt="goods7">
-                                    <h4>Крем для рук Eveline Banana</h4>
+                                    <h4 class="goods-title">Крем для рук Eveline Banana</h4>
                                     <p class="price">55 грн.</p>
                                     <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
                                 </div>
                                 <div class="goods-item" id="goods8">
                                     <img src="img/goods2.png" alt="goods8">
-                                    <h4>Крем для рук Eveline Coconut</h4>
+                                    <h4 class="goods-title">Крем для рук Eveline Coconut</h4>
                                     <p class="price">55 грн.</p>
                                     <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
                                 </div>
                             </section>
                         </div>
                         <div class="tab tab-2">
-                            Друга вкладка Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit dolor magnam corporis accusamus quos natus deleniti fugiat minus eius, laborum quae adipisci veritatis, eveniet a autem iste eaque nesciunt nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit dolor magnam corporis accusamus quos natus deleniti fugiat minus eius, laborum quae adipisci veritatis, eveniet a autem iste eaque nesciunt nam.
+                            <section class="goods">
+                                <div class="goods-item" id="goods1">
+                                    <img src="img/goods.png" alt="goods1">
+                                    <h4 class="goods-title">Крем для рук Eveline Banana</h4>
+                                    <p class="price">55 грн.</p>
+                                    <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
+                                </div>
+                                <div class="goods-item" id="goods2">
+                                    <img src="img/goods2.png" alt="goods2">
+                                    <h4 class="goods-title">Крем для рук Eveline Coconut</h4>
+                                    <p class="price">55 грн.</p>
+                                    <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
+                                </div>
+                                <div class="goods-item" id="goods3">
+                                    <img src="img/goods.png" alt="goods3">
+                                    <h4 class="goods-title">Крем для рук Eveline Banana</h4>
+                                    <p class="price">55 грн.</p>
+                                    <p class="aviability not-aviable">Немає в наявності</p>
+                                    <button class="product__btn btn" disabled>В корзину</button>
+                                </div>
+                                <div class="goods-item" id="goods4">
+                                    <img src="img/goods2.png" alt="goods4">
+                                    <h4 class="goods-title">Крем для рук Eveline Coconut</h4>
+                                    <p class="price">55 грн.</p>
+                                    <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
+                                </div>
+                                <div class="goods-item" id="goods5">
+                                    <img src="img/goods.png" alt="goods5">
+                                    <h4 class="goods-title">Крем для рук Eveline Banana</h4>
+                                    <p class="price">55 грн.</p>
+                                    <p class="aviability not-aviable">Немає в наявності</p>
+                                    <button class="product__btn btn" disabled>В корзину</button>
+                                </div>
+                                <div class="goods-item" id="goods6">
+                                    <img src="img/goods2.png" alt="goods6">
+                                    <h4 class="goods-title">Крем для рук Eveline Coconut</h4>
+                                    <p class="price">55 грн.</p>
+                                    <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
+                                </div>
+                                <div class="goods-item" id="goods7">
+                                    <img src="img/goods.png" alt="goods7">
+                                    <h4 class="goods-title">Крем для рук Eveline Banana</h4>
+                                    <p class="price">55 грн.</p>
+                                    <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
+                                </div>
+                                <div class="goods-item" id="goods8">
+                                    <img src="img/goods2.png" alt="goods8">
+                                    <h4 class="goods-title">Крем для рук Eveline Coconut</h4>
+                                    <p class="price">55 грн.</p>
+                                    <p class="aviability aviable">В наявності</p>
+                                    <button class="product__btn btn">В корзину</button>
+                                </div>
+                            </section>
                         </div>
                         <div class="tab tab-3">
                             Третя вкладка Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit dolor magnam corporis accusamus quos natus deleniti fugiat minus eius, laborum quae adipisci veritatis, eveniet a autem iste eaque nesciunt nam
@@ -109,5 +244,8 @@
     </section>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="script.js"></script>
+    <script src="simplebar.js"></script>
+    <script src="modal/modal.js"></script>
+    <script src="cart.js"></script>
 </body>
 </html>
