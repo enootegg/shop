@@ -776,7 +776,8 @@ header {
 }
 
 .order-product__text {
-  margin-right: 110px;
+  margin-right: auto;
+  width: 220px;
 }
 
 .order-product__title {
@@ -801,7 +802,7 @@ header {
 }
 
 .order-modal__list {
-  padding: 20px 0;
+  padding-top: 20px;
   display: none;
 }
 
@@ -969,6 +970,90 @@ header {
   }
 }
 
+@media (max-width: 630px){
+  .order-modal {
+    padding: 25px;
+    width: 90%;
+  }
+  
+  .order-modal__title {
+    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 18px;
+  }
+  
+  .order-modal__number {
+    font-size: 10px;
+    line-height: 15px;
+  }
+  
+  .order-modal__info {
+    border-radius: 6px;
+    padding: 24px;
+    line-height: 12px;
+  }
+  
+  .order-modal__info-item:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  
+  .order {
+    padding: 0;
+  }
+  
+  .order__label {
+    margin-bottom: 12px;
+    flex-direction: column;
+    line-height: 18px;
+  }
+
+  .order__text {
+    margin-bottom: 5px;
+  }
+  
+  .order__input {
+    padding: 0 5px;
+    height: 40px;
+    border-radius: 6px;
+  }
+  
+  /* .order-product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  } */
+  
+  .order-product__img {
+    margin-left: -15px;
+    margin-right: 5px;
+    max-width: 50px;
+  }
+  
+  .order-product__text {
+    margin-right: auto;
+  }
+  
+  .order-product__title {
+    margin-bottom: 4px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  
+  .order-product__delete {
+    font-size: 11px;
+    line-height: 11px;
+    margin-right: -6px;
+  }
+  
+  .order-modal__list {
+    padding-top: 15px;
+  }
+  
+  .order-modal__item:not(:last-child) {
+    margin-bottom: 12px;
+  }
+}
+
 @media (max-width: 600px){
   .tabs-nav__item span {
       display: block;
@@ -1132,6 +1217,62 @@ header {
   .cart-content {
     width: 290px;
     right: -30px;
+  }
+}
+
+@media (max-width: 336px){
+  .order-modal {
+    padding: 15px;
+    width: 90%;
+  }
+
+  .order-modal__info {
+    border-radius: 6px;
+    padding: 18px;
+    line-height: 11px;
+  }
+  
+  .order-modal__info-item:not(:last-child) {
+    margin-bottom: 11px;
+    font-size: 12px;
+  }
+  
+  .order__label {
+    margin-bottom: 10px;
+    flex-direction: column;
+    line-height: 14px;
+  }
+
+  .order__text {
+    margin-bottom: 4px;
+  }
+  
+  .order__input {
+    padding: 0 5px;
+    height: 35px;
+    border-radius: 4px;
+    width: 90%;
+  }
+
+  .order-modal__btn {
+    font-size: 12px;
+  }
+  
+  .order-product__title {
+    font-size: 11px;
+    line-height: 12px;
+  }
+
+  .order-product__price {
+    font-size: 12px;
+  }
+  
+  .order-modal__list {
+    padding-top: 12px;
+  }
+  
+  .order-modal__item:not(:last-child) {
+    margin-bottom: 10px;
   }
 }
 

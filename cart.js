@@ -248,19 +248,40 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('Телефон', tel);
         formData.append('Email', mail);
 
-        let xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    console.log('Відправлено');
-                }
-            }
-        }
+        sendMail();
 
-        xhr.open('POST', 'mail.php', true);
-        xhr.send(formData);
+
+
+        // let xhr = new XMLHttpRequest();
+
+        // xhr.onreadystatechange = function() {
+        //     if (xhr.readyState === 4) {
+        //         if (xhr.status === 200) {
+        //             console.log('Відправлено');
+        //         }
+        //     }
+        // }
+
+        // xhr.open('POST', 'mail.php', true);
+        // xhr.send(formData);
 
         self.reset();
     });
+
+    const readyMail = () => {
+        return formData;
+      };
+
+    function sendMail() {
+        if (!localStorage.length == "0") {
+          Email.send({
+            SecureToken: "e0f5079a-515d-4f13-935d-c187aea28de6",
+            To: "vitaliybodnarchuk2002@gmail.com",
+            From: "vitaliybodnarchuk2002@gmail.com",
+            Subject: "Замовлення",
+            Body: readyMail()
+          }).then(alert("Замовлення відправлено. Очікуйте дзвінка."));
+        }
+      }
 });
