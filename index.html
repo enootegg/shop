@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="simplebar.css">
     <link rel="stylesheet" href="modal/modal.css">
     <link rel="stylesheet" href="style.css">
@@ -18,12 +19,12 @@
                 <span></span>
             </label>
             <img src="img/logo.png" alt="logo" class="logo">
-            <a class="logoText" href="index.html">Janna Shop</a>
+            <a class="logoText" href="#main">Janna Shop</a>
             <ul class="menu__box">
-                <li><a class="menu__item" href="index.html">Головна</a></li>
-                <li><a class="menu__item" href="#">Акції</a></li>
-                <li><a class="menu__item" href="about.html">Про нас</a></li>
-                <li><a class="menu__item contacts" href="#">Контакти</a></li>
+                <li><a class="menu__item" href="#main">Головна</a></li>
+                <li><a class="menu__item" href="#services">Сервіси</a></li>
+                <li><a class="menu__item" href="#about-us">Про нас</a></li>
+                <li><a class="menu__item contacts" href="#contacts">Контакти</a></li>
             </ul>
             <div class="header__cart cart" tabindex="0">
                 <div class="cart__logo">
@@ -78,33 +79,42 @@
 					<input type="hidden" name="admin_email[]" value="maxgraph23@gmail.com">
 					<input type="hidden" name="form_subject" value="Заявка с сайта Сайт">
 					<label class="order__label">
-						<span class="order__text">Ваше ім'я</span>
+						<span class="order__text">ПІБ</span>
 						<input type="text" name="Імя" class="order__input" id="formName">
 					</label>
 					<label class="order__label">
 						<span class="order__text">Номер телефону</span>
 						<input type="tel" name="Телефон" class="order__input" placeholder="+380 (__)___-____" id="formTel">
 					</label>
-					<label class="order__label">
+					<!-- <label class="order__label">
 						<span class="order__text">Пошта</span>
 						<input type="email" name="Email" class="order__input" placeholder="example@gmail.com" id="formMail">
+					</label> -->
+                    <label class="order__label">
+						<span class="order__text">Місто</span>
+						<input type="text" name="City" class="order__input" placeholder="Львів" id="formCity">
+					</label>
+                    <label class="order__label">
+						<span class="order__text">Дані доставки</span>
+						<!-- <input type="text" name="City" class="order__input" placeholder="Львів" id="formCity"> -->
+                        <textarea name="delivery" class="order__input delivery" placeholder="Відділення чи індекс пошти, коментар якщо потрібно" id="formDelivery"></textarea>
 					</label>
 					<button class="order__btn btn">Оформити замовлення</button>
 				</form>
 			</div>
 		</div>
 	</div>
-    <div class="intro">
+    <div class="intro" id="main">
         <div class="intro-container">
             <div class="intro-text">
-                <h4>Lorem ipsum dolor sit amet.</h4>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero, facilis ipsa eius natus minima architecto.</p>
+                <h1>Інтернет-магазин JannaShop</h1>
+                <p>Ми прагнемо до найкращого, щоб кожен день радувати вас!</p>
             </div>
-            <div class="intro-button"><a href="#">Перейти</a></div>
+            <div class="intro-button"><a href="#categoriess">Переглянути товари</a></div>
         </div>
     </div>
     <section class="categories">
-        <ion-icon name="rose"></ion-icon>
+        <ion-icon name="rose" id="categoriess"></ion-icon>
         <div class="categories-wrapper">
             <div class="categories-content">
                 <div class="tabs">
@@ -242,6 +252,88 @@
             </div>
         </div>
     </section>
+    <ion-icon name="planet" id="services" class="rose"></ion-icon>
+    <section class="services-box">
+        <div class="wrapper-services">
+            <div class="services services1">
+                <div class="delivery-box">
+                    <ion-icon class="delivery" name="cube"></ion-icon>
+                    <div class="information">
+                        <h4>Безкоштовна доставка</h4>
+                        <p>На замовлення від 500 грн – безкоштовна доставка по Україні. Замовлення, підтверджені до 15:00 – відправка в той же день!</p>
+                    </div>
+                </div>
+                <div class="triangle triangle1"></div>
+            </div>
+            <div class="services services2">
+                <div class="pricetags">
+                    <ion-icon name="pricetags"></ion-icon>
+                    <div class="information">
+                        <h4>Акції та знижки</h4>
+                        <p>На сайті діють акції та знижки на всі категорії косметики. Завжди знижка для постійних клієнтів.</p>
+                    </div>
+                </div>
+                <div class="triangle triangle2"></div>
+            </div>
+            <div class="services services3">
+                <div class="interface">
+                    <ion-icon name="tablet-landscape"></ion-icon>
+                    <div class="information">
+                        <h4>Зручний інтерфейс</h4>
+                        <p>Зручний інтерфейс сайту прекрасно пристосований для перегляду з будь-якого пристрою.</p>
+                    </div>
+                </div>
+                <div class="triangle triangle3"></div>
+            </div>
+            <div class="services services4">
+                <div class="chatSupport">
+                    <ion-icon name="chatbubbles"></ion-icon>
+                    <div class="information">
+                        <h4>Онлайн підтримка</h4>
+                        <p>Ми завжди з радістю відповімо на ваші запитання, а також надамо консультації по вибору товарів в режимі онлайн.</p>
+                    </div>
+                </div>
+                <div class="triangle triangle4"></div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="sec about-us" id="about-us">
+                <h3>Про нас:</h3>
+                <p>JannaShop - це інтернет-магазин косметики та засобів для догляду шкіри.
+                    Ми продовжуємо розвиватися та вдосконалювати наш сервіс, щоб зробити вас щасливими кожен день!</p>
+                <ul class="socials">
+                    <li><a href="https://www.facebook.com/profile.php?id=100017238672747"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="https://instagram.com/_janna.shop_?igshid=7pqidfqd5k04"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="https://t.me/Yana_tvardovska"><i class="fa fa-telegram" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+            <div class="sec footer-contacts" id="contacts">
+                <h3>Контакти:</h3>
+                <ul class="info">
+                    <li>
+                        <span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
+                        <span>Пн-Пт - 9:00 - 20:00<br>
+                              Сб-Нд - 11:00 - 19:00</span>
+                    </li>
+                    <li>
+                        <span><i class="fa fa-phone" aria-hidden="true"></i></span>
+                        <p><a href="tel:+380662196227">+380662196227</a><br>
+                           <a href="tel:+380971359124">+380971359124</a></p>
+                    </li>
+                    <li>
+                        <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        <p><a href="mailto:jannashop09@gmail.com">jannashop09@gmail.com</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© JannaShop 2021</p>
+        </div>
+    </footer>
+    <div class="scroll-top" id="scroll-top"><a href="#main"><ion-icon class="rocket" name="rocket"></ion-icon></a></div>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="script.js"></script>

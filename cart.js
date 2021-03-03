@@ -232,22 +232,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelector('.order').addEventListener('submit', (e) => {
         e.preventDefault();
-        let self = e.currentTarget;
-        let formData = new FormData(self);
-        let name = self.querySelector('[name="Імя"]').value;
-        let tel = self.querySelector('[name="Телефон"]').value;
-        let mail = self.querySelector('[name="Email"]').value;
-        formData.append('Товари', JSON.stringify(productArray));
-        formData.append('Імя', name);
-        formData.append('Телефон', tel);
-        formData.append('Email', mail);
+        // let self = e.currentTarget;
+        // let formData = new FormData(self);
+        // let name = self.querySelector('[name="Імя"]').value;
+        // let tel = self.querySelector('[name="Телефон"]').value;
+        // let mail = self.querySelector('[name="Email"]').value;
+        // formData.append('Товари', JSON.stringify(productArray));
+        // formData.append('Імя', name);
+        // formData.append('Телефон', tel);
+        // formData.append('Email', mail);
 
         const cartLog = () => {
             let arr = [];
             productArray.forEach(element => {
-                arr.push(`Назва: ${element.title}`);
-                arr.push(` Ціна: ${element.price}`);
-                arr.push(` id: ${element.id}\n`);
+                // arr.push(`Назва: ${element.title}`);
+                // arr.push(` Ціна: ${element.price}`);
+                // arr.push(` id: ${element.id}\n`);
+
+                arr.push(`<br><tr>
+                            <td style='padding: 10px; border: #e9e9e9 1px solid;'>Назва: ${element.title}</td>
+                            <td style='padding: 10px; border: #e9e9e9 1px solid;'>Ціна: ${element.price}</td>
+                        </tr>`);
 
             });
             return arr;
@@ -257,11 +262,13 @@ document.addEventListener('DOMContentLoaded', () => {
             let FormValue =
               "Ім'я: " +
               document.querySelector('#formName').value +
-              " Телефон: " +
+              "<br>Телефон: " +
               document.querySelector('#formTel').value +
-              " Пошта: " +
-              document.querySelector('#formMail').value +
-              " Замовлення: ";
+              "<br>Місто: " +
+              document.querySelector('#formCity').value +
+              "<br>Дані: " +
+              document.querySelector('#formDelivery').value +
+              "<br>Замовлення: ";
             return FormValue;
           }
           
@@ -270,9 +277,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return checkValue() + cartLog();
           };
 
+          const sendSuccess = () => {
+            document.querySelector('.order__btn').style.backgroundColor = '#54da5b';
+            document.querySelector('.order__btn').textContent = 'Замовлення надіслано!'
+          };
+
     
         function sendMail() {     
-            console.log(readyMail());           
+            // console.log(readyMail());           
             if (!localStorage.length == "0") {
               Email.send({
                 SecureToken: "d0a2a0ff-f5ee-4abf-9573-bd98689c8945",
@@ -280,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 From: "mailbot7000@gmail.com",
                 Subject: "Замовлення",
                 Body: readyMail()
-              }).then(alert("Замовлення відправлено. Очікуйте дзвінка."));
+              }).then(sendSuccess());
             }
           }
 
