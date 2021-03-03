@@ -279,7 +279,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const sendSuccess = () => {
             document.querySelector('.order__btn').style.backgroundColor = '#54da5b';
-            document.querySelector('.order__btn').textContent = 'Замовлення надіслано!'
+            document.querySelector('.order__btn').textContent = 'Замовлення надіслано!';
+            document.querySelector('.order__btn').disabled = true;
           };
 
     

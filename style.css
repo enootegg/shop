@@ -290,6 +290,7 @@ header {
   flex-wrap: wrap;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
+  margin-bottom: 18px;
 }
 
 .goods-item {
@@ -398,15 +399,16 @@ header {
 
 /* SERVICES */
 
-.rose {
+.planet {
   display: flex;
   font-size: 40px;
   color: var(--second-color);
   margin: 0 auto;
   transition: all 0.4s ease 0s;
+  margin-bottom: 18px;
 }
 
-.rose:hover {
+.planet:hover {
   color: #fa6857;
   transition: all 0.4s ease 0s;
 }
@@ -771,6 +773,10 @@ header {
 .order__btn {
   width: 100%;
   transition: opacity .3s;
+}
+
+.order__btn:disabled {
+  cursor: default;
 }
 
 .order__btn:hover {
