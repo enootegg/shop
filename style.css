@@ -202,19 +202,30 @@ header {
 }
 
 .tabs-nav {
-	display: flex;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  text-align: center;
 }
+
 .tabs-nav__item {
-	flex: 0 1 33.333%;
+  position: relative;
     height: 50px;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
     color: var(--main-text-color);
     text-decoration: none;
     cursor: pointer;
+    transition: .3s ease-in-out;
+    padding: 0 20px;
+    width: 240px;
+    font-size: 15px;
 }
+
+/* .tabs-nav__item:not(:last-child) {
+  margin-right: 30px;
+} */
 
 .tabs-nav__item span {
     position: relative;
@@ -222,11 +233,28 @@ header {
 }
 
 .tabs-nav__item.is-active {
-	border-color: #55a32a;
+  color: #fff;
+}
+
+.tabs-nav__item::before {
+   content: "";
+    height: 50px;
+    width: 110%;
+    position: absolute;
+    top: 0;
+    left: -5%;
+    border-radius: 30px;
+    background-color: #eb8698;
+    transition: .3s ease-in-out;
+    opacity: 0;
+}
+
+.tabs-nav__item.is-active::before {
+  opacity: 1;
 }
 
 .tab {
-	position: relative;
+	  position: relative;
     padding-top: 20px;
     font-size: 18px;
     line-height: 24px;
@@ -235,43 +263,35 @@ header {
     position: absolute;
     visibility: hidden;
     opacity: 0;
-    transition: opacity .5s linear;
+    transition: opacity .5s ease-in;
 }
 
-.tab::before {
-    content: "";
-    height: 50px;
-    width: 33.333%;
-    position: absolute;
-    top: -50px;
-    border-radius: 40px;
-}
-
-.tab:nth-child(1) {
-    background-color: #fff;
-}
-
-.tab:nth-child(1)::before {
+.tabs-nav__item:nth-child(1)::before {
     background-color: #eb8698;
-    left: 0;
 }
 
-.tab:nth-child(2) {
-    background-color: #fff;
-}
-
-.tab:nth-child(2)::before {
+.tabs-nav__item:nth-child(2)::before {
     background-color: #9278aa;
-    left: 33.333%;
 }
 
-.tab:nth-child(3) {
-    background-color: #fff;
-}
-
-.tab:nth-child(3)::before {
+.tabs-nav__item:nth-child(3)::before {
     background-color: #97c67d;
-    right: 0;
+}
+
+.tabs-nav__item:nth-child(4)::before {
+  background-color: #4b71c4;
+}
+
+.tabs-nav__item:nth-child(5)::before {
+  background-color: #d4506d;
+}
+
+.tabs-nav__item:nth-child(6)::before {
+  background-color: #d144a7;
+}
+
+.tabs-nav__item:nth-child(7)::before {
+  background-color: #4c2c5f;
 }
 
 .tab.is-active {
@@ -279,7 +299,7 @@ header {
     position: relative;
     visibility: visible;
     opacity: 1;
-    transition-delay: 0s;
+    transition: opacity .5s ease-in;
 }
 
 /* GOODS */
@@ -1387,13 +1407,17 @@ header {
 
 @media (max-width: 600px){
   .tabs-nav__item span {
-      display: block;
-      width: 100px;
-      padding: 0;
-      white-space: nowrap;
-      text-align: center;
       font-size: 12px;
   }
+
+  .tabs-nav__item {
+    height: 40px;
+    width: 210px;
+  }
+
+  .tabs-nav__item::before {
+     height: 40px;
+ }
 
   .cart {
     margin-right: 30px;
@@ -1428,6 +1452,10 @@ header {
 }
 
 @media (max-width: 500px){
+  .tabs-nav__item {
+    width: 180px;
+  }
+
   .goods-item {
     width: 150px;
     margin: 10px;
@@ -1514,6 +1542,10 @@ header {
 }
 
 @media (max-width: 380px){
+  .tabs-nav__item {
+    width: 160px;
+  }
+
   .goods-item {
     width: 120px;
     height: 200px;
@@ -1547,7 +1579,7 @@ header {
   }
 
   .goods-item::before {
-    clip-path: circle(5s% at 80% 20%);
+    clip-path: circle(5% at 80% 20%);
   }
   
   .goods-item:hover::before {
@@ -1585,6 +1617,11 @@ header {
     width: 290px;
     right: -30px;
   }
+
+  .tabs-nav__item::before {
+    width: 100%;
+    left: 0%;
+}
 }
 
 @media (max-width: 336px){
@@ -1649,41 +1686,7 @@ header {
 }
 
 @media (max-width: 310px){
-
-  /* .goods-item {
-    width: 120px;
-    margin: 8px;
-  }
-
-  .goods-item img {
-    padding-top: 5px;
-    width: 80px;
-    height: auto;
-  }
-
-  .goods-item h4 {
-    font-size: 12px;
-    line-height: 13px;
-    margin: 0 2px;
-  }
-
-  .goods-item .price {
-    font-size: 12px;
-  }
-  
-  .goods-item .aviability{
-    font-size: 12px;
-    margin-top: -5px;
-  } */
-
   .tabs-nav__item span {
-    display: block;
-    width: 80px;
-    padding: 0 5px;
-    white-space: nowrap;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
     font-size: 10px;
   }
 
