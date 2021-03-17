@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteProducts = (productParent) => {
 
         let id = productParent.querySelector('.cart-product').dataset.id;
-        document.querySelector(`.goods-item[data-id="${id}"]`).querySelector('.product__btn').disabled = false;
-        document.querySelector(`.goods-item[data-id="${id}"]`).querySelector('.product__btn').textContent = 'В корзину';
+        document.querySelector(`.goods-front[data-id="${id}"]`).querySelector('.product__btn').disabled = false;
+        document.querySelector(`.goods-front[data-id="${id}"]`).querySelector('.product__btn').textContent = 'В корзину';
 
         let currentPrice = parseInt(priceWithoutSpaces(productParent.querySelector('.cart-product__price').textContent));
         minusFullPrice(currentPrice);
@@ -74,10 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     productsBtn.forEach(el => {
-        el.closest('.goods-item').setAttribute('data-id', randomId++);
+        el.closest('.goods-front').setAttribute('data-id', randomId++);
         el.addEventListener('click', (e) => {
             let self = e.currentTarget;
-            let parent = self.closest('.goods-item');
+            let parent = self.closest('.goods-front');
             let id = parent.dataset.id;
             let img = parent.querySelector('img').getAttribute('src');
             let title = parent.querySelector('.goods-title').textContent;
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.querySelectorAll('.cart-content__product').forEach(el => {
                 let id = el.dataset.id;
-                document.querySelector(`.goods-item[data-id="${id}"]`).querySelector('.product__btn').disabled = true;
+                document.querySelector(`.goods-front[data-id="${id}"]`).querySelector('.product__btn').disabled = true;
             });
         }
     };

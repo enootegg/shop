@@ -42,6 +42,15 @@ for (let anchor of anchors) {
   })
 }
 
+const closeMenu = () => {
+    document.querySelector('.menu__btn').click();
+}
+
+document.querySelectorAll('.menu__item').forEach(el => {
+    el.addEventListener('click', closeMenu);
+})
+
+
 // SCROLL 
 
 window.onscroll = function() {scrollFunction()}
