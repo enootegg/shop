@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderModalOpenProd = document.querySelector('.order-modal__btn');
     const orderModalList = document.querySelector('.order-modal__list');
     let price = 0;
+    let totalPrice = 0;
     let randomId = 0;
     let productArray = [];
 
@@ -22,16 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return String(str).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
     };
 
-    const plusFullPrice = (currentPrice) => {
-        return price += currentPrice;
-    };
-
-    const minusFullPrice = (currentPrice) => {
-        return price -= currentPrice;
-    };
-
     const printFullPrice = () => {
-        fullPrice.textContent = `${normalPrice(price)} грн`;
+        fullPrice.textContent = `${normalPrice(totalPrice)} грн`;
     };
 
     const printQuantity = () => {
@@ -48,6 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="cart-product__text">
                     <h3 class="cart-product__title">${title}</h3>
                     <span class="cart-product__price">${normalPrice(price)} грн</span>
+                    <div class="cart-product__quantity">
+                        <div class="cart-quantity__container">
+                            <div class="cart-product__plus"></div>
+                            <div class="cart-product__minus"></div>
+                            <div class="cart-product__value">1</div>
+                        </div>
+                    </div>
+                    <div class="product__total">
+                        Всього: <span class="cart-product__ttlprice">0</span>
+                    </div>
                 </div>
                 <button class="cart-product__delete" aria-label="Видалити товар">
                     <ion-icon class="cart-product__delete" name="trash"></ion-icon>
@@ -63,15 +66,38 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`.goods-front[data-id="${id}"]`).querySelector('.product__btn').disabled = false;
         document.querySelector(`.goods-front[data-id="${id}"]`).querySelector('.product__btn').textContent = 'В корзину';
 
-        let currentPrice = parseInt(priceWithoutSpaces(productParent.querySelector('.cart-product__price').textContent));
-        minusFullPrice(currentPrice);
-        printFullPrice();
+        // let currentPrice = parseInt(priceWithoutSpaces(productParent.querySelector('.cart-product__price').textContent));
+        // minusFullPrice(currentPrice);
+        // printFullPrice();
         productParent.remove();
-
+        countTotalPrice();
+        printFullPrice();
         printQuantity();
-
         updateStorage();
     };
+
+    function countItemPrice() {
+        let li = document.querySelector('.cart-content__item');
+        let priceItem = parseInt(li.querySelector('.cart-product__price').textContent);
+        let qt = parseInt(li.querySelector('.cart-product__value').textContent);
+        let sumItem = priceItem * qt;
+        li.querySelector('.cart-product__ttlprice').textContent = sumItem;
+     };
+  
+     function reCountItemPrice(li) {
+        let priceItem = parseInt(li.querySelector('.cart-product__price').textContent);
+        let qt = parseInt(li.querySelector('.cart-product__value').textContent);
+        let sumItem = priceItem * qt;
+        li.querySelector('.cart-product__ttlprice').textContent = sumItem;
+     }
+
+     function countTotalPrice() {
+        totalPrice = 0;
+        document.querySelectorAll('.cart-product__ttlprice').forEach(el => {
+           let I = parseInt(el.textContent);
+           totalPrice += I;
+        });
+     }
 
     productsBtn.forEach(el => {
         el.closest('.goods-front').setAttribute('data-id', randomId++);
@@ -84,13 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // let priceString = parent.querySelector('.price').textContent;
             let priceNumber = parseInt(priceWithoutSpaces(parent.querySelector('.price').textContent));
             
-            plusFullPrice(priceNumber);
-            printFullPrice();
+            // plusFullPrice(priceNumber);
+            // printFullPrice();
             // add to cart
             cartProductsList.querySelector('.simplebar-content').insertAdjacentHTML('afterbegin', generateCartProduct(img, title, priceNumber, id));
 
+            countItemPrice()
             printQuantity();
-
+            countTotalPrice();
+            printFullPrice();
             updateStorage();
 
             // disabled btn
@@ -102,7 +130,34 @@ document.addEventListener('DOMContentLoaded', () => {
     cartProductsList.addEventListener('click', (e) => {
         if (e.target.classList.contains('cart-product__delete')) {
             deleteProducts(e.target.closest('.cart-content__item'));
-        }
+        } else if (e.target.classList.contains('cart-product__minus')) {
+            let li = e.target.closest('.cart-content__item');
+            let qt = li.querySelector('.cart-product__value').textContent;
+            if (qt >= 1) {
+               qt--;
+               if (qt < 1) {
+                   qt = 99;
+               }
+               li.querySelector('.cart-product__value').textContent = qt;
+               reCountItemPrice(li);
+               countTotalPrice();
+               printFullPrice();
+               updateStorage();
+            }
+         } else if (e.target.classList.contains('cart-product__plus')) {
+            let li = e.target.closest('.cart-content__item');
+            let qt = li.querySelector('.cart-product__value').textContent
+            qt++;
+            if (qt > 99) {
+                qt = 1;
+            }
+            li.querySelector('.cart-product__value').textContent = qt;
+            
+            reCountItemPrice(li);
+            countTotalPrice();
+            printFullPrice();
+            updateStorage();
+         }
     });
 
     let flag = 0;
@@ -118,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const generateModalProduct = (img, title, price, id) => {
+    const generateModalProduct = (img, title, price, id, count) => {
         return `
             <li class="order-modal__item">
                 <article class="order-modal__product order-product" data-id="${id}">
@@ -126,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="order-product__text">
                         <h3 class="order-product__title">${title}</h3>
                         <span class="order-product__price">${normalPrice(price)} грн</span>
+                        <span class="order-product__count">${count} шт</span>
                     </div>
                     <button class="order-product__delete">Видалити</button>
                 </article>
@@ -135,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const modal = new GraphModal({
         isOpen: (modal) => {
-            console.log('opened');
+            // console.log('opened');
             let array  = cartProductsList.querySelector('.simplebar-content').children;
             let fullprice = fullPrice.textContent;
             let length = array.length;
@@ -148,20 +204,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 let title = item.querySelector('.cart-product__title').textContent;
                 let priceNumber = parseInt(priceWithoutSpaces(item.querySelector('.cart-product__price').textContent));
                 let id = item.querySelector('.cart-product').dataset.id;
+                let count = item.querySelector('.cart-product__value').textContent;
 
-                orderModalList.insertAdjacentHTML('afterbegin', generateModalProduct(img, title, priceNumber, id));
+                orderModalList.insertAdjacentHTML('afterbegin', generateModalProduct(img, title, priceNumber, id, count));
 
                 let obj = {};
                 obj.title = title;
                 obj.price = priceNumber;
                 obj.id = id;
+                obj.count = count;
                 productArray.push(obj);
             }
 
             console.log(productArray);
         },
         isClose: () => {
-            console.log('closed');
+            // console.log('closed');
             document.querySelectorAll('.order-modal__item').forEach(e => {
                 e.innerHTML = '';
             });
@@ -180,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cartProductsList.querySelector('.simplebar-content').innerHTML = localStorage.getItem('products');
             printQuantity();
             countSumm();
+            countTotalPrice();
             printFullPrice();
 
             document.querySelectorAll('.cart-content__product').forEach(el => {
@@ -211,10 +270,15 @@ document.addEventListener('DOMContentLoaded', () => {
             let array  = cartProductsList.querySelector('.simplebar-content').children;
             let cartProduct = document.querySelector(`.cart-content__product[data-id="${id}"]`).closest('.cart-content__item');
             deleteProducts(cartProduct);
+            let price;
+            let count;
             e.target.closest('.order-modal__product').remove();
 
-            document.querySelectorAll('.order-product__price').forEach(e => {
-                i += parseInt(priceWithoutSpaces(e.textContent));
+            document.querySelectorAll('.order-product__text').forEach(e => {
+                price = parseInt(e.querySelector('.order-product__price').textContent);
+                count = parseInt(e.querySelector('.order-product__count').textContent);
+                i += price * count;
+                // i += parseInt(priceWithoutSpaces(e.textContent));
             });
             document.querySelector('.order-modal__summ span').textContent = `${normalPrice(i)} грн`;
             
@@ -225,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.querySelector('.order-modal__quantity span').textContent = `${productArray.length} шт`;
 
-            console.log(productArray);
+            // console.log(productArray);
 
         }
     });
@@ -251,7 +315,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 arr.push(`<br><tr>
                             <td style='padding: 10px; border: #e9e9e9 1px solid;'>Назва: ${element.title}</td>
-                            <td style='padding: 10px; border: #e9e9e9 1px solid;'>Ціна: ${element.price}</td>
+                            <td style='padding: 10px; border: #e9e9e9 1px solid;'>Ціна: ${element.price} грн</td>
+                            <td style='padding: 10px; border: #e9e9e9 1px solid;'>Кількість: ${element.count} шт</td>
                         </tr>`);
 
             });
@@ -268,6 +333,8 @@ document.addEventListener('DOMContentLoaded', () => {
               document.querySelector('#formCity').value +
               "<br>Дані: " +
               document.querySelector('#formDelivery').value +
+              "<br>Ціна разом: " +
+              document.querySelector('.fullprice').textContent +
               "<br>Замовлення: ";
             return FormValue;
           }
@@ -281,6 +348,12 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.order__btn').style.backgroundColor = '#54da5b';
             document.querySelector('.order__btn').textContent = 'Замовлення надіслано!';
             document.querySelector('.order__btn').disabled = true;
+
+            const closeModal = () => {
+                modal.close();
+            }
+
+            setTimeout(closeModal, 2000);
           };
 
     
@@ -299,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           sendMail();
 
-          console.log('submit');
+        //   console.log('submit');
 
     });
 });
