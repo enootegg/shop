@@ -294,6 +294,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    document.querySelector('.order-modal__close').addEventListener('click', () => {
+        modal.close();
+    });
+
     document.querySelector('.order').addEventListener('submit', (e) => {
         e.preventDefault();
         // let self = e.currentTarget;
@@ -321,9 +325,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             });
             return arr;
-          };
+        };
           
-          function checkValue() {
+        function checkValue() {
             let FormValue =
               "Ім'я: " +
               document.querySelector('#formName').value +
@@ -337,24 +341,19 @@ document.addEventListener('DOMContentLoaded', () => {
               document.querySelector('.fullprice').textContent +
               "<br>Замовлення: ";
             return FormValue;
-          }
+        }
           
-          const readyMail = () => {        
+        const readyMail = () => {        
 
-            return checkValue() + cartLog();
-          };
+        return checkValue() + cartLog();
+        };
 
-          const sendSuccess = () => {
-            document.querySelector('.order__btn').style.backgroundColor = '#54da5b';
-            document.querySelector('.order__btn').textContent = 'Замовлення надіслано!';
-            document.querySelector('.order__btn').disabled = true;
+        const sendSuccess = () => {
+        document.querySelector('.order__btn').style.backgroundColor = '#54da5b';
+        document.querySelector('.order__btn').textContent = 'Замовлення надіслано!';
+        document.querySelector('.order__btn').disabled = true;
 
-            const closeModal = () => {
-                modal.close();
-            }
-
-            setTimeout(closeModal, 2000);
-          };
+        };
 
     
         function sendMail() {     

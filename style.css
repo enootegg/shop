@@ -824,11 +824,13 @@ header {
   cursor: pointer;
   opacity: 0;
   transition: .5s;
+  z-index: -100;
 }
 
 .cart-product__quantity:hover .cart-product__plus {
   opacity: 1;
   right: 10px;
+  z-index: 10;
 }
 
 .cart-product__minus {
@@ -845,11 +847,13 @@ header {
   cursor: pointer;
   opacity: 0;
   transition: .5s;
+  z-index: -100;
 }
 
 .cart-product__quantity:hover .cart-product__minus {
   opacity: 1;
   left: 10px;
+  z-index: 10;
 }
 
 .cart-product__value {
@@ -898,17 +902,10 @@ header {
 }
 
 .order-modal__title {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   color: #5d71dd;
   font-size: 18px;
   line-height: 20px;
-}
-
-.order-modal__number {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 20px;
-  text-align: right;
 }
 
 .order-modal__info {
@@ -1044,6 +1041,43 @@ header {
 
 .order-modal__item:not(:last-child) {
   margin-bottom: 14px;
+}
+
+.order-modal__close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  height: 24px;
+  width: 24px;
+  transition: all .3s;
+  cursor: pointer;
+}
+
+.order-modal__close::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  transform: scale(0.4);
+  border-radius: 50%;
+  transition: all .3s;
+}
+
+.order-modal__close:hover::before {
+  background-color: #53535352;
+  transition: all .3s;
+  transform: scale(1);
+}
+
+.order-modal__close:hover {
+  color: #fff;
+  transition: all .3s;
+}
+
+.order-modal__close ion-icon {
+  font-size: 24px;
 }
 
 /* FOOTER */
@@ -1486,14 +1520,9 @@ header {
   }
   
   .order-modal__title {
-    margin-bottom: 30px;
+    margin-bottom: 14px;
     font-size: 16px;
     line-height: 18px;
-  }
-  
-  .order-modal__number {
-    font-size: 10px;
-    line-height: 15px;
   }
   
   .order-modal__info {
@@ -1810,6 +1839,11 @@ header {
     padding: 15px;
     width: 90%;
   }
+
+  .order-modal__close {
+    top: 10px;
+    right: 10px;
+  }
 }
 
 @media (max-width: 350px){
@@ -1825,6 +1859,10 @@ header {
 
   .cart-product__text {
     width: 150px;
+  }
+
+  .order-modal__title {
+    font-size: 14px;
   }
 }
 
@@ -1882,6 +1920,17 @@ header {
   
   .order-modal__item:not(:last-child) {
     margin-bottom: 10px;
+  }
+
+  .order-modal__close ion-icon {
+    font-size: 20px;
+  }
+
+  .order-modal__close::before {
+    top: -4px;
+    left: -4px;
+    right: 0px;
+    bottom: 0px;
   }
 }
 
