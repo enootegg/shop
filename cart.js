@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!localStorage.length == "0") {
               Email.send({
                 SecureToken: "d0a2a0ff-f5ee-4abf-9573-bd98689c8945",
-                To: "jannashop09@etlgr.com",
+                To: "vitaliybodnarchuk2002@gmail.com",
                 From: "mailbot7000@gmail.com",
                 Subject: "Замовлення",
                 Body: readyMail()
